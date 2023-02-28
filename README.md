@@ -2,6 +2,9 @@
 
 # **<div align="center">LionWolf Haus<br> POS system<br><br></div>**
 
+## **Trello Board**
+[View](https://trello.com/b/zMoGZUGv/pos-system)
+
 <br>
 
 ## **About this project**
@@ -46,3 +49,25 @@ The app offers the below functions :
 <img style="width:40px" src="./docs/icons/skills/PostgreSQL.png">
 
 
+<br>
+
+## **Mood board**
+----  
+
+
+<br>
+
+## **Layout**
+----  
+
+
+<br>
+
+## **AAD**
+----  
+
+
+<br>
+
+## **DFD**
+----  
