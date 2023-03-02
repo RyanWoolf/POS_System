@@ -40,13 +40,14 @@ The app offers the below functions :
 
 ## **Tech Stack**
 ----  
+<div>
 <img style="width:40px" src="./docs/icons/skills/php.png">
 <img style="width:40px" src="./docs/icons/skills/Laravel.png">
 <img style="width:40px" src="./docs/icons/skills/Javascript.png">
 <img style="width:40px" src="./docs/icons/skills/React.png">
 <img style="width:40px" src="./docs/icons/skills/TailwindCSS.png">
 <img style="width:40px" src="./docs/icons/skills/PostgreSQL.png">
-
+</div>
 
 
 
@@ -57,7 +58,7 @@ The app offers the below functions :
 
 **1st Moodboard**
 
-![Moodboad_01](/docs/moodboard/Moodboard_01.png)
+![Moodboard_01](/docs/moodboard/Moodboard_01.png)
 
 
 
@@ -66,6 +67,10 @@ The app offers the below functions :
 
 ## **Layout**
 ----  
+Primary designs
+
+![Tablet_login](/docs/layouts/tablet_login.png)
+![Table_tables](/docs/layouts/tablet_tables.png)
 
 
 <br>
