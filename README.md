@@ -70,7 +70,8 @@ The app offers the below functions :
 Primary designs
 
 ![Tablet_login](/docs/layouts/tablet_login.png)
-![Table_tables](/docs/layouts/tablet_tables.png)
+![Table_Tables](/docs/layouts/tablet_tables.png)
+![Table_Tables_Orders](/docs/layouts/tablet_tables_orders.png)
 
 
 <br>
