@@ -74,6 +74,7 @@ Primary designs
 ![Table_Tables_Orders](/docs/layouts/tablet_tables_orders.png)
 ![Table_Bookings](/docs/layouts/tablet_bookings.png)
 ![Table_Accounts](/docs/layouts/tablet_accounts.png)
+![Table_Reports](/docs/layouts/tablet_reports.png)
 
 
 <br>
