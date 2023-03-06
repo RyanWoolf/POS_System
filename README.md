@@ -85,5 +85,12 @@ Primary designs
 
 <br>
 
+## **ERD**
+----  
+![ERD](/docs/ERD/ERD.png)
+
+
+<br>
+
 ## **DFD**
 ----  
