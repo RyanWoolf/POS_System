@@ -9,7 +9,10 @@ module.exports = {
     extend: {
       colors: {
         'bg_start': '#CCD0D9',
-        'bg_end': '#AAB2BD'
+        'bg_end': '#AAB2BD',
+        'main_text': '#656D78',
+        'button': '#FFFCF5',
+        'pin_button': '#EAEAEA'
       }
     },
     fontFamily: {
