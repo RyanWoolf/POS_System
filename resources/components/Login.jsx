@@ -25,25 +25,55 @@ const Login = () => {
 
   const onEnter = (evt) => {
     evt.preventDefault()
-    if (isIDset) {
-      // next page
-      alert('ready to move on')
-      setForm({
-        login_id: '',
-        password: ''
-      })
-      setIsIDset(false)
-      setSelectedNum('')
+    if (!isIDset) { 
+      if (!selectedNum) { // if Staff id is not entered
+        alert('Please enter your Staff ID')
+      } else { // if Staff id is entered, show Password input 
+        setForm({
+          ...form,
+          login_id: selectedNum
+        })
+        setSelectedNum('')
+        setIsIDset(true)
+      }
     } else {
       setForm({
         ...form,
-        login_id: selectedNum
+        password: selectedNum
       })
-      setSelectedNum('')
-      setIsIDset(true)
-    }
+      // Logging in function here
+      loggingIn()
 
-    // setIsIDset(true)
+      // Temporary setup here
+      // alert(`ID: ${form.login_id}, Password: ${selectedNum}`)
+      // setIsIDset(false)
+      // setSelectedNum('')
+    }
+  }
+
+  const loggingIn = async () => {
+    const returnedUser = await fetch('localhost:5432', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(form)
+    })
+    const data = await returnedUser.json()
+      .then((response) => {
+        if (response.code == 200) {
+          setForm({
+            login_id: '',
+            password: ''
+          })
+          setIsIDset(false)
+          setSelectedNum('')
+          // success and navigate page
+        } else {
+          alert('Login Failed. Please try again.')
+        }
+      })
   }
 
   const pin_numbers = [7, 8, 9, 4, 5, 6, 1, 2, 3, 0]
