@@ -25,11 +25,24 @@ const Login = () => {
 
   const onEnter = (evt) => {
     evt.preventDefault()
-    const { value, name } = evt.target
-    setForm({
-      ...form,
-      [name]: value
-    })
+    if (isIDset) {
+      // next page
+      alert('ready to move on')
+      setForm({
+        login_id: '',
+        password: ''
+      })
+      setIsIDset(false)
+      setSelectedNum('')
+    } else {
+      setForm({
+        ...form,
+        login_id: selectedNum
+      })
+      setSelectedNum('')
+      setIsIDset(true)
+    }
+
     // setIsIDset(true)
   }
 
@@ -68,7 +81,7 @@ const Login = () => {
               <div className="transition duration-300 flex justify-around gap-4 mt-8 pb-1 border-b-2 border-gray-400">
                 <img src={icon_user} alt="" />
                 <input name="login_id" type="text" placeholder='STAFF ID' className='bg-transparent w-40' 
-                  value={selectedNum} />
+                  value={!isIDset ? selectedNum : ''} />
                 <button onClick={delNum} className={!selectedNum ? 'transition duration-300 opacity-0' : 'transition duration-300 opacity-90'}>
                   <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" fill="currentColor" clip-rule="evenodd"><path d="M7 5h17v16h-17l-7-7.972 7-8.028zm7 6.586l-2.586-2.586-1.414 1.414 2.586 2.586-2.586 2.586 1.414 1.414 2.586-2.586 2.586 2.586 1.414-1.414-2.586-2.586 2.586-2.586-1.414-1.414-2.586 2.586z"/></svg>
                 </button>
