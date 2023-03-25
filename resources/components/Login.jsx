@@ -11,8 +11,17 @@ const Login = () => {
   })
   const [ isIDset, setIsIDset ] = useState(false)
   const [ isPWset, setIsPWset ] = useState(false)
-  
 
+
+  const onKeypad = (evt) => {
+    if (pin_numbers.includes(Number(evt.key))) {
+      setSelectedNum(selectedNum + evt.key)
+    } else if (evt.key == "Enter") {
+      evt.preventDefault()
+      onEnter(evt)
+    }
+  }
+  
   const onInputNum = (evt) => {
     evt.preventDefault()
     setSelectedNum(selectedNum + evt.target.value)
@@ -78,7 +87,8 @@ const Login = () => {
 
   const pin_numbers = [7, 8, 9, 4, 5, 6, 1, 2, 3, 0]
   const pin_pad = pin_numbers.map(item => {
-    return <button 
+    return <button
+            key={item} 
             value={item}
             onClick={onInputNum}
             className=" bg-pin_button rounded-full w-16 h-16 font-bold shadow-xl">
@@ -92,7 +102,7 @@ const Login = () => {
 
   return (
     <article className="flex justify-center m-auto w-screen h-screen">
-      <div className='flex m-auto gap-20'>
+      <div className='flex m-auto gap-20' >
         <div className="flex flex-col">
           <div className="w-[400px] h-[200px] rounded-3xl p-6 bg-pin_button shadow-xl">
             <p className=''>Message</p>
@@ -102,28 +112,28 @@ const Login = () => {
 
           </div>
         </div>
-        <div className="flex flex-col">
+        <div className="flex flex-col" >
           <div className="">
 
-            <form action="" className="m-auto flex gap-10">
+            <form action="" className="m-auto flex gap-10" onKeyDown={onKeypad}>
               { !isIDset ? (
               // ID input
               <div className="transition duration-300 flex justify-around gap-4 mt-8 pb-1 border-b-2 border-gray-400">
                 <img src={icon_user} alt="" />
-                <input name="login_id" type="text" placeholder='STAFF ID' className='bg-transparent w-40' 
+                <input name="login_id" type="text" placeholder='STAFF ID' className='bg-transparent w-40' onKeyDown={(e) => {e.preventDefault()}}
                   value={!isIDset ? selectedNum : ''} />
                 <button onClick={delNum} className={!selectedNum ? 'transition duration-300 opacity-0' : 'transition duration-300 opacity-90'}>
-                  <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" fill="currentColor" clip-rule="evenodd"><path d="M7 5h17v16h-17l-7-7.972 7-8.028zm7 6.586l-2.586-2.586-1.414 1.414 2.586 2.586-2.586 2.586 1.414 1.414 2.586-2.586 2.586 2.586 1.414-1.414-2.586-2.586 2.586-2.586-1.414-1.414-2.586 2.586z"/></svg>
+                  <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" fillRule="evenodd" fill="currentColor" clipRule="evenodd"><path d="M7 5h17v16h-17l-7-7.972 7-8.028zm7 6.586l-2.586-2.586-1.414 1.414 2.586 2.586-2.586 2.586 1.414 1.414 2.586-2.586 2.586 2.586 1.414-1.414-2.586-2.586 2.586-2.586-1.414-1.414-2.586 2.586z"/></svg>
                 </button>
               </div> 
               ) : (
               // PW input
               <div className="transition duration-300 flex justify-around gap-4 mt-8 pb-1 border-b-2 border-gray-400">
                 <img src={icon_pw} alt="" />
-                <input name="password" type="password" placeholder='PIN' className='bg-transparent w-40' 
+                <input name="password" type="password" placeholder='PIN' className='bg-transparent w-40' onKeyDown={(e) => {e.preventDefault()}}
                   value={selectedNum} />
                 <button onClick={delNum} className={!selectedNum ? 'transition duration-300 opacity-0' : 'transition duration-300 opacity-90'}>
-                  <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" fill="currentColor" clip-rule="evenodd"><path d="M7 5h17v16h-17l-7-7.972 7-8.028zm7 6.586l-2.586-2.586-1.414 1.414 2.586 2.586-2.586 2.586 1.414 1.414 2.586-2.586 2.586 2.586 1.414-1.414-2.586-2.586 2.586-2.586-1.414-1.414-2.586 2.586z"/></svg>
+                  <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" fillRule="evenodd" fill="currentColor" clipRule="evenodd"><path d="M7 5h17v16h-17l-7-7.972 7-8.028zm7 6.586l-2.586-2.586-1.414 1.414 2.586 2.586-2.586 2.586 1.414 1.414 2.586-2.586 2.586 2.586 1.414-1.414-2.586-2.586 2.586-2.586-1.414-1.414-2.586 2.586z"/></svg>
                 </button>
               </div>
               ) }
