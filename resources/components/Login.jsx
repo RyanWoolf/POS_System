@@ -19,6 +19,9 @@ const Login = () => {
     } else if (evt.key == "Enter") {
       evt.preventDefault()
       onEnter(evt)
+    } else if (evt.key == "Backspace") {
+      evt.preventDefault()
+      delNum(evt)
     }
   }
   
