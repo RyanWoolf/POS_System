@@ -14,13 +14,13 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
-
-        \App\Models\User::factory()->create([
-            'name' => 'Ryan',
-            'login_id' => '102327',
-            'password' => '3369',
-            'is_admin' => true
+        $this->call([
+            UserSeeder::class,
+            TableSeeder::class,
         ]);
+
+
+
+       
     }
 }
