@@ -17,7 +17,7 @@ return new class extends Migration
             $table->increments('id');
             $table->timestamps();
             $table->date('date')->format('d/m/Y');
-            $table->dateTime('time')->format('g:i a');
+            $table->dateTime('time')->format('h:i A');
             $table->integer('pax');
             $table->text('comment')->nullable();
             $table->unsignedInteger('customer_id');

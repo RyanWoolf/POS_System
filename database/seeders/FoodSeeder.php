@@ -123,7 +123,8 @@ class FoodSeeder extends Seeder
     
         ];
         // Food seeds
-        DB::table('foods')->insert($foods);
-
+        foreach ($foods as $food) {
+            DB::table('foods')->insert($food);
+        }
     }
 }
