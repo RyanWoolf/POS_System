@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
             TableSeeder::class,
             FoodSeeder::class,
             CustomerSeeder::class,
+            PaymentSeeder::class,
         ]);
 
 
