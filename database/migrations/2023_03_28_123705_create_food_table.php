@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('food', function (Blueprint $table) {
-            $table->id('id');
+            $table->increments('id');
             $table->string('name');
             $table->integer('price');
             $table->boolean('is_GF')->default(false);
