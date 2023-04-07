@@ -2,6 +2,7 @@ import React, { useRef, useState } from 'react'
 import login_img from '../../public/images/background/login.png'
 import icon_user from '../../public/images/icons/login_user.png'
 import icon_pw from '../../public/images/icons/login_pw.png'
+import { useNavigate } from 'react-router-dom'
 
 const Login = () => {
   const [ selectedNum, setSelectedNum ] = useState('')
@@ -11,7 +12,7 @@ const Login = () => {
   })
   const [ isIDset, setIsIDset ] = useState(false)
   const [ isPWset, setIsPWset ] = useState(false)
-
+  const nav = useNavigate()
 
   const onKeypad = (evt) => {
     if (pin_numbers.includes(Number(evt.key))) {
@@ -54,6 +55,7 @@ const Login = () => {
         password: selectedNum
       })
       // Logging in function here
+      nav('/menu') // Temporary
       loggingIn()
 
       // Temporary setup here
@@ -82,6 +84,7 @@ const Login = () => {
           setIsIDset(false)
           setSelectedNum('')
           // success and navigate page
+          nav('/menu')
         } else {
           alert('Login Failed. Please try again.')
         }
