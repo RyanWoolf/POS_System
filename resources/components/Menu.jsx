@@ -1,36 +1,39 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import styled from "styled-components";
+import { Dashboard, Today, FolderShared, QueryStats, Settings } from '@mui/icons-material'
 
-const StyledMenuButton = styled.button`
-  width: 184px;
-  height: 50px;
-  font-size: 15px;
-  font-weight: bold;
-  border-radius: 25px;
-  background: linear-gradient(45deg, #FFFFFF, #FFFCF5);
-  box-shadow: 2px 5px 7px rgba(0, 0, 0, 0.1);
-  margin: 10px 0px;
-`
-function MenuButton({children}) {
-  return <StyledMenuButton>{children}</StyledMenuButton>
-}
 
 const Menu = () => {
+
+  const StyledMenuButton = styled.button`
+    width: 184px;
+    height: 50px;
+    font-size: 15px;
+    font-weight: bold;
+    border-radius: 25px;
+    margin: 10px 0px;
+    text-align: left;
+    padding-left: 40px;
+  `
+  function MenuButton({children}) {
+    return <StyledMenuButton className=' duration-400 hover:drop-shadow-xl hover:bg-gradient-to-br from-menu_button_start to-menu_button_end'>
+      {children}</StyledMenuButton>
+  }
   return (
     <div className="flex drop-shadow-lg">
-
       <div id="menu-container" className=" bg-menu_bg w-[226px] h-screen flex flex-col items-center justify-between">
         <div>
           <div className="my-12 text-center">
             <Link>Your logo</Link>
           </div>
           <div className="flex flex-col">
-            <MenuButton>Tables</MenuButton>
-            <MenuButton>Bookings</MenuButton>
-            <MenuButton>Accounts</MenuButton>
-            <MenuButton>Report</MenuButton>
-            <MenuButton>Setting</MenuButton>
+            {console.log(Dashboard)}
+            <MenuButton><Dashboard className="mr-2"/>Tables</MenuButton>
+            <MenuButton><Today className="mr-2"/>Bookings</MenuButton>
+            <MenuButton><FolderShared className="mr-2"/>Accounts</MenuButton>
+            <MenuButton><QueryStats className="mr-2"/>Report</MenuButton>
+            <MenuButton><Settings className="mr-2"/>Setting</MenuButton>
           </div>
         </div>
         <div id="user-container">
