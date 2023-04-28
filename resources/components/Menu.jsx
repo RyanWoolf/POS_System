@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import styled from "styled-components";
-import { Dashboard, Today, FolderShared, QueryStats, Settings } from '@mui/icons-material'
+import { Dashboard, Today, FolderShared, QueryStats, Settings, AccountCircle } from '@mui/icons-material'
+import Tables from './Tables';
 
 
 const Menu = () => {
@@ -10,14 +11,14 @@ const Menu = () => {
     width: 184px;
     height: 50px;
     font-size: 15px;
-    font-weight: bold;
+    font-weight: 600;
     border-radius: 25px;
     margin: 10px 0px;
     text-align: left;
-    padding-left: 40px;
+    padding-left: 35px;
   `
   function MenuButton({children}) {
-    return <StyledMenuButton className=' duration-400 hover:drop-shadow-xl hover:bg-gradient-to-br from-menu_button_start to-menu_button_end'>
+    return <StyledMenuButton className='transition ease-in-out duration-300 hover:bg-menu_button_start hover:drop-shadow-xl'>
       {children}</StyledMenuButton>
   }
   return (
@@ -29,16 +30,16 @@ const Menu = () => {
           </div>
           <div className="flex flex-col">
             {console.log(Dashboard)}
-            <MenuButton><Dashboard className="mr-2"/>Tables</MenuButton>
-            <MenuButton><Today className="mr-2"/>Bookings</MenuButton>
-            <MenuButton><FolderShared className="mr-2"/>Accounts</MenuButton>
-            <MenuButton><QueryStats className="mr-2"/>Report</MenuButton>
-            <MenuButton><Settings className="mr-2"/>Setting</MenuButton>
+            <MenuButton><Dashboard className="mr-3"/>Tables</MenuButton>
+            <MenuButton><Today className="mr-3"/>Bookings</MenuButton>
+            <MenuButton><FolderShared className="mr-3"/>Accounts</MenuButton>
+            <MenuButton><QueryStats className="mr-3"/>Report</MenuButton>
+            <MenuButton><Settings className="mr-3"/>Setting</MenuButton>
           </div>
         </div>
         <div id="user-container">
           <div className="flex flex-col text-center justify-evenly bg-gradient-to-br from-menu_button_start to-menu_button_end drop-shadow-lg w-[184px] h-[217px] rounded-3xl mb-6 items-center">
-            <div className="rounded-full"></div>
+            <AccountCircle fontSize='large'/>
             <div>
               <h3 className=" font-bold text-xl">User name</h3>
               <p className="text-xs font-light">Admin</p>
@@ -53,7 +54,7 @@ const Menu = () => {
 
 
       <div id="content-container">
-        Content
+        <Tables></Tables>
       </div>
 
 

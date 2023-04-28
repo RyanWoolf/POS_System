@@ -16,6 +16,8 @@ module.exports = {
         'menu_bg': '#D9D9D9',
         'menu_button_start': '#FFFFFF',
         'menu_button_end': '#FFFCF5',
+        'second_called': '#B6DE8C',
+        'third_called': '#F4CC7A',
       }
     },
     fontFamily: {
