@@ -2,7 +2,8 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import styled from "styled-components";
 import { Dashboard, Today, FolderShared, QueryStats, Settings, AccountCircle } from '@mui/icons-material'
-import Tables from './Tables';
+import Tables from './DiningLayout/FrontDining';
+import TableMap from './TableMap';
 
 
 const Menu = () => {
@@ -54,7 +55,7 @@ const Menu = () => {
 
 
       <div id="content-container">
-        <Tables></Tables>
+        <TableMap></TableMap>
       </div>
 
 

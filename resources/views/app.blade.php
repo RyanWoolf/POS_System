@@ -12,5 +12,6 @@
 </head>
 <body class="bg-gradient-to-br from-bg_start to-bg_end bg-fixed">
 	<div id="root"></div>
+	<script src="../path/to/flowbite/dist/flowbite.min.js"></script>
 </body>
 </html>
