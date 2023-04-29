@@ -5,8 +5,14 @@ import RearDining from './DiningLayout/RearDining';
 import PDR from './DiningLayout/PDR';
 import Terrace from './DiningLayout/Terrace';
 import Bar from './DiningLayout/Bar';
+import '@material/mwc-icon-button'
+import '@material/mwc-button'
+
+
+
 
 const TableMap = () => {
+
 
   return (
     <section>      
@@ -16,13 +22,58 @@ const TableMap = () => {
         <div>
           <span className="font-medium">Info alert!</span> Change a few things up and try submitting again.
         </div>
-
       </div>
+
+      {/* <nav className="flex justify-between items-center m-10">
+        <div>
+          <mwc-icon-button className="" icon="notifications"></mwc-icon-button>
+        </div>
+        <div className="flex gap-4">
+          <mwc-button dense raised >Terrace</mwc-button>
+          <mwc-button dense raised disabled>Bar</mwc-button>
+          <mwc-button dense raised disabled>Front dining</mwc-button>
+          <mwc-button dense raised disabled>Rear dining</mwc-button>
+          <mwc-button dense raised disabled>PDR</mwc-button>
+
+        </div>
+        <div className="">
+          <mwc-icon-button className="" icon="print"></mwc-icon-button>
+        </div>
+      </nav> */}
 
       
       <div id="default-carousel" className="relative w-full" data-carousel="static">
+        <nav className="flex justify-between items-center m-10">
+          <div>
+            <mwc-icon-button className="" icon="notifications"></mwc-icon-button>
+          </div>
+          <div className="flex gap-4">
+            {/* <mwc-button dense raised aria-current="true" data-carousel-slide-to="0">Terrace</mwc-button>
+            <mwc-button dense raised aria-current="false" data-carousel-slide-to="1">Bar</mwc-button>
+            <mwc-button dense raised aria-current="false" data-carousel-slide-to="2">Front dining</mwc-button>
+            <mwc-button dense raised aria-current="false" data-carousel-slide-to="3">Rear dining</mwc-button>
+            <mwc-button dense raised aria-current="false" data-carousel-slide-to="4">PDR</mwc-button> */}
+
+          </div>
+          <div className="">
+            <mwc-icon-button className="" icon="print"></mwc-icon-button>
+          </div>
+        </nav>
+        {/* <!-- Slider indicators --> */}
+        <div className="absolute z-30 flex space-x-3 -translate-x-1/2 bottom-5 left-1/2">
+          {/* <mwc-button dense raised aria-current="true" aria-label="Slide 1" data-carousel-slide-to="0">Terrace</mwc-button>
+          <mwc-button dense raised aria-current="false" aria-label="Slide 2" data-carousel-slide-to="1">Bar</mwc-button>
+          <mwc-button dense raised aria-current="false" aria-label="Slide 3" data-carousel-slide-to="2">Front dining</mwc-button>
+          <mwc-button dense raised aria-current="false" aria-label="Slide 4" data-carousel-slide-to="3">Rear dining</mwc-button>
+          <mwc-button dense raised aria-current="false" aria-label="Slide 5" data-carousel-slide-to="4">PDR</mwc-button> */}
+          <button type="button" className="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 1" data-carousel-slide-to="0"></button>
+          <button type="button" className="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 2" data-carousel-slide-to="1"></button>
+          <button type="button" className="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 3" data-carousel-slide-to="2"></button>
+          <button type="button" className="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 4" data-carousel-slide-to="3"></button>
+          <button type="button" className="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 5" data-carousel-slide-to="4"></button>
+        </div>
         {/* <!-- Carousel wrapper --> */}
-        <div className="relative h-[700px] w-[calc(100vw-226px)] overflow-hidden rounded-lg">
+        <div className="relative h-[700px] w-[calc(100vw-226px)] top-8 overflow-hidden rounded-lg">
             {/* <!-- Item 1 --> */}
             <div className="hidden duration-700 ease-in-out " data-carousel-item>
               <Terrace></Terrace>
@@ -45,14 +96,7 @@ const TableMap = () => {
             </div>
           
         </div>
-        {/* <!-- Slider indicators --> */}
-        <div className="absolute z-30 flex space-x-3 -translate-x-1/2 bottom-5 left-1/2">
-          <button type="button" className="w-3 h-3 rounded-full" aria-current="true" aria-label="Slide 1" data-carousel-slide-to="0"></button>
-          <button type="button" className="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 2" data-carousel-slide-to="1"></button>
-          <button type="button" className="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 3" data-carousel-slide-to="2"></button>
-          <button type="button" className="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 4" data-carousel-slide-to="3"></button>
-          <button type="button" className="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 5" data-carousel-slide-to="4"></button>
-        </div>
+        
         {/* <!-- Slider controls --> */}
         <button type="button" className="absolute top-0 left-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-prev>
             <span className="inline-flex items-center justify-center w-8 h-8 rounded-full sm:w-10 sm:h-10 bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
