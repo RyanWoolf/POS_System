@@ -1,5 +1,4 @@
-import React from 'react'
-import 'flowbite';
+import React, { useRef, useState } from 'react'
 import FrontDining from './DiningLayout/FrontDining';
 import RearDining from './DiningLayout/RearDining';
 import PDR from './DiningLayout/PDR';
@@ -10,10 +9,19 @@ import '@material/mwc-button'
 
 
 
-
 const TableMap = () => {
+  const [ currentPage, setCurrentPage ] = useState(0)
+  const containerRef = useRef(null)
 
-
+  const handleClick = (page) => {
+    setCurrentPage(page)
+    containerRef.current.scrollTo({
+      left: page * 1200,
+      behavior: 'smooth'
+    })
+  }
+  const carouselItems = ['Terrace', 'Bar', 'Front dining', 'Rear dining', 'PDR']
+  
   return (
     <section>      
       <div className="flex p-4 mb-4 text-sm text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400" role="alert">
@@ -23,99 +31,44 @@ const TableMap = () => {
           <span className="font-medium">Info alert!</span> Change a few things up and try submitting again.
         </div>
       </div>
-
-      {/* <nav className="flex justify-between items-center m-10">
+      <nav className="flex justify-between items-center m-10">
         <div>
           <mwc-icon-button className="" icon="notifications"></mwc-icon-button>
         </div>
         <div className="flex gap-4">
-          <mwc-button dense raised >Terrace</mwc-button>
-          <mwc-button dense raised disabled>Bar</mwc-button>
-          <mwc-button dense raised disabled>Front dining</mwc-button>
-          <mwc-button dense raised disabled>Rear dining</mwc-button>
-          <mwc-button dense raised disabled>PDR</mwc-button>
+          {carouselItems.map((name, i)=>(
+            <mwc-button key={i} onClick={()=> handleClick(i)} dense raised>{name}</mwc-button>
+          ))}
 
         </div>
         <div className="">
           <mwc-icon-button className="" icon="print"></mwc-icon-button>
         </div>
-      </nav> */}
+      </nav>
 
-      
-      <div id="default-carousel" className="relative w-full" data-carousel="static">
-        <nav className="flex justify-between items-center m-10">
-          <div>
-            <mwc-icon-button className="" icon="notifications"></mwc-icon-button>
-          </div>
-          <div className="flex gap-4">
-            {/* <mwc-button dense raised aria-current="true" data-carousel-slide-to="0">Terrace</mwc-button>
-            <mwc-button dense raised aria-current="false" data-carousel-slide-to="1">Bar</mwc-button>
-            <mwc-button dense raised aria-current="false" data-carousel-slide-to="2">Front dining</mwc-button>
-            <mwc-button dense raised aria-current="false" data-carousel-slide-to="3">Rear dining</mwc-button>
-            <mwc-button dense raised aria-current="false" data-carousel-slide-to="4">PDR</mwc-button> */}
+      <div id="carousel-container" ref={containerRef} className="flex h-[600px] w-[calc(100vw-226px)] overflow-hidden overflow-x-scroll scroll-smooth snap-x snap-mandatory">
+        <div className="snap-center">
+          <Terrace/>
+        </div>
+        <div className="snap-center">
+          <Bar/>
+        </div>
+        <div className="snap-center">
+          <FrontDining/>
+        </div>
+        <div className="snap-center">
+          <RearDining/>
+        </div>
+        <div className="snap-center">
+          <PDR/>
+        </div>
 
-          </div>
-          <div className="">
-            <mwc-icon-button className="" icon="print"></mwc-icon-button>
-          </div>
-        </nav>
-        {/* <!-- Slider indicators --> */}
-        <div className="absolute z-30 flex space-x-3 -translate-x-1/2 bottom-5 left-1/2">
-          {/* <mwc-button dense raised aria-current="true" aria-label="Slide 1" data-carousel-slide-to="0">Terrace</mwc-button>
-          <mwc-button dense raised aria-current="false" aria-label="Slide 2" data-carousel-slide-to="1">Bar</mwc-button>
-          <mwc-button dense raised aria-current="false" aria-label="Slide 3" data-carousel-slide-to="2">Front dining</mwc-button>
-          <mwc-button dense raised aria-current="false" aria-label="Slide 4" data-carousel-slide-to="3">Rear dining</mwc-button>
-          <mwc-button dense raised aria-current="false" aria-label="Slide 5" data-carousel-slide-to="4">PDR</mwc-button> */}
-          <button type="button" className="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 1" data-carousel-slide-to="0"></button>
-          <button type="button" className="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 2" data-carousel-slide-to="1"></button>
-          <button type="button" className="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 3" data-carousel-slide-to="2"></button>
-          <button type="button" className="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 4" data-carousel-slide-to="3"></button>
-          <button type="button" className="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 5" data-carousel-slide-to="4"></button>
-        </div>
-        {/* <!-- Carousel wrapper --> */}
-        <div className="relative h-[700px] w-[calc(100vw-226px)] top-8 overflow-hidden rounded-lg">
-            {/* <!-- Item 1 --> */}
-            <div className="hidden duration-700 ease-in-out " data-carousel-item>
-              <Terrace></Terrace>
-            </div>
-            {/* <!-- Item 2 --> */}
-            <div className="hidden duration-700 ease-in-out " data-carousel-item>
-              <Bar></Bar>
-            </div>
-            {/* <!-- Item 3 --> */}
-            <div className="hidden duration-700 ease-in-out " data-carousel-item>
-              <FrontDining></FrontDining>
-            </div>
-            {/* <!-- Item 4 --> */}
-            <div className="hidden duration-700 ease-in-out" data-carousel-item>
-              <RearDining></RearDining>  
-            </div>
-            {/* <!-- Item 5 --> */}
-            <div className="hidden duration-700 ease-in-out" data-carousel-item>
-              <PDR></PDR>
-            </div>
-          
-        </div>
-        
-        {/* <!-- Slider controls --> */}
-        <button type="button" className="absolute top-0 left-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-prev>
-            <span className="inline-flex items-center justify-center w-8 h-8 rounded-full sm:w-10 sm:h-10 bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
-                <svg aria-hidden="true" className="w-5 h-5 text-white sm:w-6 sm:h-6 dark:text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7"></path></svg>
-                <span className="sr-only">Previous</span>
-            </span>
-        </button>
-        <button type="button" className="absolute top-0 right-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-next>
-            <span className="inline-flex items-center justify-center w-8 h-8 rounded-full sm:w-10 sm:h-10 bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
-                <svg aria-hidden="true" className="w-5 h-5 text-white sm:w-6 sm:h-6 dark:text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path></svg>
-                <span className="sr-only">Next</span>
-            </span>
-        </button>
       </div>
-
-
-
-
-
+        <div className="pagination w-full text-center">
+          {carouselItems.map((_, i)=>(
+            <button key={i} type="button" className={" rounded-full w-2 h-2 pb-2 mx-1 " + (currentPage === i ? 'bg-zinc-500' : 'bg-zinc-400') } onClick={()=> handleClick(i)}></button>
+          ))}
+        </div>
     </section>
   )
 }

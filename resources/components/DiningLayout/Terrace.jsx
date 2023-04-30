@@ -3,7 +3,7 @@ import Table from './TableSet/Table';
 
 const Terrace = () => {
   return (
-    <div className="flex h-fit w-[calc(100vw-226px)] justify-center items-center">
+    <div id="terrace" className="flex h-fit w-[calc(100vw-226px)] justify-center items-center">
       <div className="w-[1000px] h-[550px] flex items-center justify-evenly">
         <div className="h-full flex flex-col justify-between">
           <Table number="1" seats="2" direction="row" status="first" ></Table>

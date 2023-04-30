@@ -3,6 +3,7 @@
 @tailwind utilities;
 
 
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -25,6 +26,6 @@ mwc-button {
 }
 
 
-.button-color{
-
+#carousel-container::-webkit-scrollbar {
+  display: none;
 }

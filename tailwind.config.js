@@ -6,7 +6,7 @@ module.exports = {
     "./resources/**/*.vue",
     "./node_modules/flowbite/**/*.js",
     './resources/**/*.{js,jsx,ts,tsx}',
-    './node_modules/flowbite-react/**/*.{js,jsx,ts,tsx}'
+    './node_modules/flowbite-react/**/*.{js,jsx,ts,tsx}',
   ],
   theme: {
     extend: {
@@ -29,6 +29,7 @@ module.exports = {
 
   },
   plugins: [
-    require('flowbite/plugin')
+    require('flowbite/plugin'),
   ],
+  darkMode: "class"
 }
