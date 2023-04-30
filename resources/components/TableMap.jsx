@@ -4,9 +4,16 @@ import RearDining from './DiningLayout/RearDining';
 import PDR from './DiningLayout/PDR';
 import Terrace from './DiningLayout/Terrace';
 import Bar from './DiningLayout/Bar';
+import vegan from '../../public/images/icons/vegan.png'
+import vegetarian from '../../public/images/icons/vegetarian.png'
+import dairyFree from '../../public/images/icons/dairyFree.png'
+import glutenFree from '../../public/images/icons/glutenFree.png'
 import '@material/mwc-icon-button'
 import '@material/mwc-button'
+// import '@material/mwc-menu';
+// import '@material/mwc-list'
 import 'flowbite'
+
 
 
 
@@ -27,18 +34,40 @@ const TableMap = () => {
     <>
       <section className="w-full h-full flex flex-col justify-center items-center">      
 
-        <nav className="flex justify-between items-center mb-14 px-14 w-full">
-          <div>
-            <mwc-icon-button className="" icon="notifications"></mwc-icon-button>
-          </div>
-          <div className="flex gap-4">
-            {carouselItems.map((name, i)=>(
-              <mwc-button key={i} onClick={()=> handleClick(i)} dense raised>{name}</mwc-button>
-            ))}
+        <nav className="flex flex-col justify-between items-center mb-14 px-14 w-full gap-2">
+          <div className="flex justify-between items-center w-full">
+            <div>
+              <mwc-icon-button className="" icon="notifications"></mwc-icon-button>
+            </div>
+            <div className="flex gap-4">
+              {carouselItems.map((name, i)=>
+                <mwc-button key={i} onClick={()=> handleClick(i)} dense raised style={currentPage===i ? {} : {opacity: 0.5}}>{name}</mwc-button>
+              )}
 
+            </div>
+            <div className="">
+              <mwc-icon-button className="" icon="print"></mwc-icon-button>
+            </div>
           </div>
-          <div className="">
-            <mwc-icon-button className="" icon="print"></mwc-icon-button>
+          <div className=" font-medium text-[11px] flex gap-4">
+            <div className='flex gap-2 items-end'>
+              <img className='w-4 h-4' src={vegan} alt="" />
+              <span>Vegan</span>
+            </div>
+            <div className='flex gap-2 items-end'>
+              <img className='w-4 h-4' src={vegetarian} alt="" />
+              <span>Vegetarian</span>
+            </div>
+            <div className='flex gap-2 items-end'>
+              <img className='w-4 h-4' src={dairyFree} alt="" />
+              <span>Dairy free</span>
+            </div>
+            <div className='flex gap-2 items-end'>
+              <img className='w-4 h-4' src={glutenFree} alt="" />
+              <span>Gluten free</span>
+            </div>
+    
+
           </div>
         </nav>
 
