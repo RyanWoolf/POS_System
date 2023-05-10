@@ -21,6 +21,12 @@ module.exports = {
         'menu_button_end': '#FFFCF5',
         'second_called': '#B6DE8C',
         'third_called': '#F4CC7A',
+        'entree': '#FFF1E9',
+        'main': '#E9F2EE',
+        'side': '#DCE8FF',
+        'dessert': '#E4FFF5',
+        'drink': '#F3DAFF',
+        'order_button': '#F6F6F6',
       }
     },
     fontFamily: {
