@@ -4,7 +4,7 @@ import vegetarian from '../../../public/images/icons/vegetarian.png'
 import dairyFree from '../../../public/images/icons/dairyFree.png'
 import glutenFree from '../../../public/images/icons/glutenFree.png'
 
-const Dietary = ({label=true, ve=true, vg=true, df=true, gf=true, button=false}) => {
+const Dietary = ({label=true, ve=false, vg=false, df=false, gf=false, button=false}) => {
   return (
     <div>
       <div className={`font-medium text-[11px] flex ${button ? '' : 'gap-4'}`}>

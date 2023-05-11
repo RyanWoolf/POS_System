@@ -29,6 +29,11 @@ mwc-icon {
   --mdc-icon-size: 20px;
 }
 
+/* mwc-icon-button {
+  --mdc-icon-button-size: 30px;
+  --mdc-icon-size: 20px;
+} */
+
 #carousel-container::-webkit-scrollbar {
   display: none;
 }
