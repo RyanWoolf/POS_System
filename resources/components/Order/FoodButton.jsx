@@ -6,12 +6,15 @@ import '@material/mwc-icon-button'
 
 const FoodButton = ({name, price, type, ve, vg, df, gf}) => {
   const [count, setCount] = useState(0)
+  if (count < 0) {
+    setCount(0)
+  }
 
 
 
 
   return (
-    <button className={`w-[152.2px] shadow-md h-32 text-left p-3 pb-2 bg-${count > 0 ? type:'white'} flex flex-col justify-between rounded-lg border-l-8 border-${type}`}>
+    <button className={`w-[152.2px] shadow-md h-32 text-left p-3 pb-2 bg-${count > 0 ? type : 'white'} flex flex-col justify-between rounded-lg border-l-8 border-${type}`} value={count}>
       <div>
         <div className="h-[12px]">
           <Dietary df={df} gf={gf} ve={ve} vg={vg} label={false} button={true}></Dietary>

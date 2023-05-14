@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Dietary from './Labels/Dietary'
 import CategoryButton from './Order/CategoryButton'
 import FoodButton from './Order/FoodButton'
@@ -128,7 +128,13 @@ const foods = [
 
 ];
 
+let orders = {}
+for (let item of foods) {
+  orders[item.name] = 0
+}
+
 const Order = () => {
+  let [ docket, setDocket ] = useState(orders)
   const Label = ({ label }) => {
     return (
       <section className="mt-8 mb-4">
@@ -252,7 +258,7 @@ const Order = () => {
           <div>
             <div className="flex flex-col justify-between w-full p-2 h-[calc(100vh-200px)] rounded-2xl bg-gradient-to-br from-menu_button_start to-menu_button_end drop-shadow-lg">
               <section>
-                <div className="w-full p-2">
+                <div className="w-full p-2 overflow">
                   <div className="flex justify-between w-full mb-2">
                     <div>
                       <H4>Main 1</H4>
@@ -267,6 +273,7 @@ const Order = () => {
                     </div>
                     <H4>$ 27.50</H4>
                   </div>
+                  {}
                 </div>
                 <hr/>
 
