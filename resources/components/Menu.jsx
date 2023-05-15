@@ -31,7 +31,6 @@ const Menu = () => {
             <Link>Your logo</Link>
           </div>
           <div className="flex flex-col">
-            {console.log(Dashboard)}
             <MenuButton><Dashboard className="mr-3"/>Tables</MenuButton>
             <MenuButton><Today className="mr-3"/>Bookings</MenuButton>
             <MenuButton><FolderShared className="mr-3"/>Accounts</MenuButton>

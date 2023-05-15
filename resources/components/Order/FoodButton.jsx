@@ -4,17 +4,26 @@ import Dietary from '../Labels/Dietary'
 import '@material/mwc-icon-button'
 
 
-const FoodButton = ({name, price, type, ve, vg, df, gf}) => {
-  const [count, setCount] = useState(0)
-  if (count < 0) {
-    setCount(0)
-  }
+const FoodButton = ({name, price, type, ve, vg, df, gf, add, minus, children}) => {
+  // const [count, setCount] = useState(0)
+  // if (count < 0) {
+  //   setCount(0)
+  // }
+
+  // const add = () => {
+  //   setCount(count + 1)
+  //   evt
+  // }
+  // const minus = () => {
+  //   setCount(count - 1)
+  //   evt
+  // }
 
 
 
 
   return (
-    <button className={`w-[152.2px] shadow-md h-32 text-left p-3 pb-2 bg-${count > 0 ? type : 'white'} flex flex-col justify-between rounded-lg border-l-8 border-${type}`} value={count}>
+    <button className={`w-[152.2px] shadow-md h-32 text-left p-3 pb-2 bg-${children > 0 ? type : 'white'} flex flex-col justify-between rounded-lg border-l-8 border-${type}`} >
       <div>
         <div className="h-[12px]">
           <Dietary df={df} gf={gf} ve={ve} vg={vg} label={false} button={true}></Dietary>
@@ -24,9 +33,9 @@ const FoodButton = ({name, price, type, ve, vg, df, gf}) => {
       </div>
       <div className="w-full flex items-center justify-end">
       {/* <div className="w-full flex"> */}
-        <mwc-icon-button style={{ '--mdc-icon-size': '18px', '--mdc-icon-button-size': '30px' }} icon='indeterminate_check_box' onClick={()=>setCount(count-1)}></mwc-icon-button>
-        <h5>{count}</h5>
-        <mwc-icon-button style={{ '--mdc-icon-size': '18px', '--mdc-icon-button-size': '30px' }} icon='add_box' onClick={()=>setCount(count+1)}></mwc-icon-button>
+        <mwc-icon-button style={{ '--mdc-icon-size': '18px', '--mdc-icon-button-size': '30px' }} icon='indeterminate_check_box' onClick={minus}></mwc-icon-button>
+        <h5>{children}</h5>
+        <mwc-icon-button style={{ '--mdc-icon-size': '18px', '--mdc-icon-button-size': '30px' }} icon='add_box' onClick={add}></mwc-icon-button>
         
       </div>
     </button>

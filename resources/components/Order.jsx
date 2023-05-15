@@ -4,6 +4,7 @@ import CategoryButton from './Order/CategoryButton'
 import FoodButton from './Order/FoodButton'
 import '@material/mwc-textfield'
 import styled from 'styled-components';
+// import '@material/mwc-icon-button'
 
 const foods = [
   // Entrees
@@ -32,13 +33,6 @@ const foods = [
       'name' : 'Manchego fritter',
       'price' : 7,
       'is_VT' : true,
-      'type' : 'entree'
-  },
-  {
-      'name' : 'Warm house marinated olives',
-      'price' : 7,
-      'is_GF' : true,
-      'is_DF' : true,
       'type' : 'entree'
   },
 
@@ -134,7 +128,7 @@ for (let item of foods) {
 }
 
 const Order = () => {
-  let [ docket, setDocket ] = useState(orders)
+  const [ docket, setDocket ] = useState(orders)
   const Label = ({ label }) => {
     return (
       <section className="mt-8 mb-4">
@@ -180,7 +174,7 @@ const Order = () => {
     }
     const rendering = foodList.map((item,idx)=>{
       return (
-        <>
+        <div key={idx}>
           {!labelRender[item.type] ? <>
           <Label key={idx} label={item.type.toUpperCase()}></Label> 
           <div className="flex flex-wrap gap-2">
@@ -194,15 +188,54 @@ const Order = () => {
               vg={food.is_VT}
               df={food.is_GF}
               gf={food.is_DF}
-              ></FoodButton>:'')
+              add={()=>{
+                docket[food.name] < 0 ?
+                setDocket({
+                  ...docket,
+                  [food.name]: 0
+                }) :
+                setDocket({
+                  ...docket,
+                  [food.name]: docket[food.name] + 1
+                })
+              }}
+              minus={()=>{
+                docket[food.name] <= 0 ?
+                setDocket({
+                  ...docket,
+                  [food.name]: 0
+                }) :
+                setDocket({
+                  ...docket,
+                  [food.name]: docket[food.name] - 1
+                })
+              }}
+              >{docket[food.name]}</FoodButton>:'')
             })}
           </div>
           {labelRender[item.type] = true} </>: ''}
-        </>
+        </div>
         )
     })
     return rendering
   }
+
+  const docketRendering = () => {
+    let result = []
+    for (let item of Object.keys(docket)) {
+      result.push(
+        <div className="flex justify-between w-full mb-2">
+          <div>
+            <H4>{item}</H4>
+            <p className="text-[10px] pl-1 font-light">Seat 1</p>
+          </div>
+          <H4>{foods}</H4>
+        </div>
+      )
+    }
+    return result
+  }
+  console.log(Object.keys(docket))
 
   return (
     <article className="bg-menu_bg h-screen w-[calc(100vw-226px-60px)] absolute right-0 px-6 pt-6">
@@ -274,6 +307,7 @@ const Order = () => {
                     <H4>$ 27.50</H4>
                   </div>
                   {}
+
                 </div>
                 <hr/>
 
