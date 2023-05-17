@@ -6,129 +6,137 @@ import '@material/mwc-textfield'
 import styled from 'styled-components';
 // import '@material/mwc-icon-button'
 
-const foods = [
+const foods = {
   // Entrees
-  {
-      'name' : 'Warm house marinated olives',
+  'Warm house marinated olives': {
       'price' : 7,
       'is_GF' : true,
       'is_DF' : true,
       'is_VT' : true,
-      'type' : 'entree'
+      'type' : 'entree',
+      qty: 5
   },
-  {
-      'name' : 'Warm house mixed nuts',
+  'Warm house mixed nuts': {
       'price' : 6,
       'is_VG' : true,
       'is_DF' : true,
-      'type' : 'entree'
+      'type' : 'entree',
+      qty: 0
   },
-  {
-      'name' : 'House sourdough',
+  'House sourdough': {
       'price' : 6,
       'is_VT' : true,
-      'type' : 'entree'
+      'type' : 'entree',
+      qty: 0
   },
-  {
-      'name' : 'Manchego fritter',
+  'Manchego fritter': {
       'price' : 7,
       'is_VT' : true,
-      'type' : 'entree'
+      'type' : 'entree',
+      qty: 0
   },
 
   // Mains
-  {
-      'name' : 'Quinoa salad',
+  'Quinoa salad': {
       'price' : 16,
       'is_GF' : true,
       'is_VG' : true,
-      'type' : 'main'
+      'type' : 'main',
+      qty: 0
   },
-  {
-      'name' : 'Grilled calamari',
+  'Grilled calamari': {
       'price' : 17,
       'is_GF' : true,
       'is_DF' : true,
-      'type' : 'main'
+      'type' : 'main',
+      qty: 0
   },
-  {
-      'name' : 'Charcuterie plate',
+  'Charcuterie plate': {
       'price' : 22,
-      'type' : 'main'
+      'type' : 'main',
+      qty: 0
   },
-  {
-      'name' : 'Pappardelle',
+  'Pappardelle': {
       'price' : 24,
-      'type' : 'main'
+      'type' : 'main',
+      qty: 0
   },
-  {
-      'name' : 'Fish of the day',
+  'Fish of the day': {
       'price' : 28,
       'is_DF' : true,
-      'type' : 'main'
+      'type' : 'main',
+      qty: 0
   },
-  {
-      'name' : 'Roast chicken',
+  'Roast chicken': {
       'price' : 28,
       'is_GF' : true,
-      'type' : 'main'
+      'type' : 'main',
+      qty: 0
   },
-  {
-      'name' : 'Chargrilled sirloin steak',
+  'Chargrilled sirloin steak': {
       'price' : 35,
       'is_DF' : true,
-      'type' : 'main'
+      'type' : 'main',
+      qty: 0
   },
 
   // Sides
-  {
-      'name' : 'Green beans',
+  'Green beans': {
       'price' : 8,
       'is_GF' : true,
       'is_DF' : true,
-      'type' : 'side'
+      'type' : 'side',
+      qty: 0
   },
-  {
-      'name' : 'Spring salad',
+  'Spring salad': {
       'price' : 8,
       'is_DF' : true,
-      'type' : 'side'
+      'type' : 'side',
+      qty: 0
   },
-  {
-      'name' : 'Hand cut chips',
+  'Hand cut chips': {
       'price' : 8,
       'is_GF' : true,
       'is_DF' : true,
-      'type' : 'side'
+      'type' : 'side',
+      qty: 0
   },
 
   // Desserts
-  {
-      'name' : 'White chocolate pannacotta',
+  'White chocolate pannacotta': {
       'price' : 16,
-      'type' : 'dessert'
+      'type' : 'dessert',
+      qty: 0
   },
-  {
-      'name' : 'Pavlova',
+  'Pavlova': {
       'price' : 16,
-      'type' : 'dessert'
+      'type' : 'dessert',
+      qty: 0
   },
-  {
-      'name' : 'Affogato',
+  'Affogato': {
       'price' : 16,
       'is_GF' : true,
-      'type' : 'dessert'
+      'type' : 'dessert',
+      qty: 0
   },
 
-];
+};
 
-let orders = {}
-for (let item of foods) {
-  orders[item.name] = 0
+// let orders = {}
+// for (let item of foods) {
+//   orders[item.name] = 0
+// }
+
+const types = []
+for (let item in foods) {
+  if (types.includes(foods[item].type)) {
+    continue
+  }
+  types.push(foods[item].type)
 }
 
 const Order = () => {
-  const [ docket, setDocket ] = useState(orders)
+  const [ docket, setDocket ] = useState({})
   const Label = ({ label }) => {
     return (
       <section className="mt-8 mb-4">
@@ -172,70 +180,137 @@ const Order = () => {
       dessert: false,
       drink: false
     }
-    const rendering = foodList.map((item,idx)=>{
-      return (
-        <div key={idx}>
-          {!labelRender[item.type] ? <>
-          <Label key={idx} label={item.type.toUpperCase()}></Label> 
-          <div className="flex flex-wrap gap-2">
-            {foodList.map((food, idx)=>{
-              return (item.type === food.type ? <FoodButton 
+    const result = []
+    for (let item of types) {
+      result.push(
+        <div key={item}>
+           {!labelRender[item] ? <>
+           <Label label={item.toUpperCase()}></Label> 
+           <div className="flex flex-wrap gap-2">
+
+             {Object.keys(foodList).map((food, idx)=>{
+              return (foodList[food].type === item ? <FoodButton
               key={idx} 
-              type={food.type} 
-              name={food.name} 
-              price={food.price}
-              ve={food.is_VG}
-              vg={food.is_VT}
-              df={food.is_GF}
-              gf={food.is_DF}
+              type={foodList[food].type} 
+              name={food} 
+              price={foodList[food].price}
+              ve={foodList[food].is_VG}
+              vg={foodList[food].is_VT}
+              df={foodList[food].is_GF}
+              gf={foodList[food].is_DF}
+              qty={docket[food] || 0}
               add={()=>{
-                docket[food.name] < 0 ?
+                docket[food] < 0 ?
                 setDocket({
                   ...docket,
-                  [food.name]: 0
+                  [food]: 0
                 }) :
                 setDocket({
                   ...docket,
-                  [food.name]: docket[food.name] + 1
+                  [food]: (docket[food] || 0) + 1
                 })
               }}
               minus={()=>{
-                docket[food.name] <= 0 ?
+                docket[food] <= 0 ?
                 setDocket({
                   ...docket,
-                  [food.name]: 0
+                  [food]: 0
                 }) :
                 setDocket({
                   ...docket,
-                  [food.name]: docket[food.name] - 1
+                  [food]: (docket[food] || 0) - 1
                 })
               }}
-              >{docket[food.name]}</FoodButton>:'')
+              ></FoodButton>:'')
             })}
           </div>
-          {labelRender[item.type] = true} </>: ''}
+          {labelRender[item] = true} </>: ''}
         </div>
-        )
-    })
-    return rendering
+      )
+      console.log(item)
+    }
+    return result
+
+    // const rendering = foodList.map((item,idx)=>{
+    //   return (
+    //     <div key={idx}>
+    //       {!labelRender[item.type] ? <>
+    //       <Label key={idx} label={item.type.toUpperCase()}></Label> 
+    //       <div className="flex flex-wrap gap-2">
+    //         {foodList.map((food, idx)=>{
+    //           return (item.type === food.type ? <FoodButton 
+    //           key={idx} 
+    //           type={food.type} 
+    //           name={food.name} 
+    //           price={food.price}
+    //           ve={food.is_VG}
+    //           vg={food.is_VT}
+    //           df={food.is_GF}
+    //           gf={food.is_DF}
+    //           add={()=>{
+    //             docket[food.name] < 0 ?
+    //             setDocket({
+    //               ...docket,
+    //               [food.name]: 0
+    //             }) :
+    //             setDocket({
+    //               ...docket,
+    //               [food.name]: docket[food.name] + 1
+    //             })
+    //           }}
+    //           minus={()=>{
+    //             docket[food.name] <= 0 ?
+    //             setDocket({
+    //               ...docket,
+    //               [food.name]: 0
+    //             }) :
+    //             setDocket({
+    //               ...docket,
+    //               [food.name]: docket[food.name] - 1
+    //             })
+    //           }}
+    //           >{docket[food.name]}</FoodButton>:'')
+    //         })}
+    //       </div>
+    //       {labelRender[item.type] = true} </>: ''}
+    //     </div>
+    //     )
+    // })
+    // return rendering
   }
 
-  const docketRendering = () => {
+  // const docketRendering = () => {
+  //   let result = []
+  //   for (let item of Object.keys(docket)) {
+  //     result.push(
+  //       <div className="flex justify-between w-full mb-2">
+  //         <div>
+  //           <H4>{item}</H4>
+  //           <p className="text-[10px] pl-1 font-light">Seat 1</p>
+  //         </div>
+  //         <H4>{foods}</H4>
+  //       </div>
+  //     )
+  //   }
+  //   return result
+  // }
+  // console.log(Object.keys(docket))
+
+  const docketRendering = (docket) => {
     let result = []
-    for (let item of Object.keys(docket)) {
+    for (let item in docket) {
       result.push(
         <div className="flex justify-between w-full mb-2">
           <div>
             <H4>{item}</H4>
             <p className="text-[10px] pl-1 font-light">Seat 1</p>
           </div>
-          <H4>{foods}</H4>
+          <H4>$ {foods[item]['price']}.00</H4>
         </div>
       )
     }
     return result
   }
-  console.log(Object.keys(docket))
 
   return (
     <article className="bg-menu_bg h-screen w-[calc(100vw-226px-60px)] absolute right-0 px-6 pt-6">
@@ -292,7 +367,7 @@ const Order = () => {
             <div className="flex flex-col justify-between w-full p-2 h-[calc(100vh-200px)] rounded-2xl bg-gradient-to-br from-menu_button_start to-menu_button_end drop-shadow-lg">
               <section>
                 <div className="w-full p-2 overflow">
-                  <div className="flex justify-between w-full mb-2">
+                  {/* <div className="flex justify-between w-full mb-2">
                     <div>
                       <H4>Main 1</H4>
                       <p className="text-[10px] pl-1 font-light">Seat 1</p>
@@ -305,8 +380,8 @@ const Order = () => {
                       <p className="text-[10px] pl-1 font-light">Seat 1</p>
                     </div>
                     <H4>$ 27.50</H4>
-                  </div>
-                  {}
+                  </div> */}
+                  {docketRendering(docket)}
 
                 </div>
                 <hr/>
