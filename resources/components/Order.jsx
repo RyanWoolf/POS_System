@@ -299,17 +299,21 @@ const Order = () => {
   const docketRendering = (docket) => {
     let result = []
     for (let item in docket) {
-      result.push(
-        <div className="flex justify-between w-full mb-2">
-          <div>
-            <H4>{item}</H4>
-            <p className="text-[10px] pl-1 font-light">Seat 1</p>
-          </div>
-          <H4>$ {foods[item]['price']}.00</H4>
-        </div>
-      )
+      if (docket[item] > 0) {
+        for (let i=0; i<docket[item]; i++) {
+          result.push(
+            <div className="flex justify-between w-full mb-2">
+              <div>
+                <H4>{item}</H4>
+                <p className="text-[10px] pl-1 font-light">Seat 1</p>
+              </div>
+              <H4>$ {foods[item]['price']}.00</H4>
+            </div>
+          )
+        }
+      }
     }
-    return result
+    return result.reverse()
   }
 
   return (
@@ -366,7 +370,7 @@ const Order = () => {
           <div>
             <div className="flex flex-col justify-between w-full p-2 h-[calc(100vh-200px)] rounded-2xl bg-gradient-to-br from-menu_button_start to-menu_button_end drop-shadow-lg">
               <section>
-                <div className="w-full p-2 overflow">
+                <div className="w-full p-2 overflow min-h-[60px]">
                   {/* <div className="flex justify-between w-full mb-2">
                     <div>
                       <H4>Main 1</H4>
