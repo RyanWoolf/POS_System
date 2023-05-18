@@ -1,4 +1,16 @@
 @tailwind base;
+
+*::-webkit-scrollbar {
+  width: 4px;
+}
+*::-webkit-scrollbar-track {
+  border-radius: 5px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #656d784e;
+  border-radius: 14px;
+}
 @tailwind components;
 @tailwind utilities;
 
@@ -29,10 +41,6 @@ mwc-icon {
   --mdc-icon-size: 20px;
 }
 
-/* mwc-icon-button {
-  --mdc-icon-button-size: 30px;
-  --mdc-icon-size: 20px;
-} */
 
 #carousel-container::-webkit-scrollbar {
   display: none;
@@ -51,3 +59,11 @@ h5 {
 hr {
   border: 1.5px solid #54545456;
 }
+
+.scrollbox {
+  overflow: overlay;
+}
+
+
+
+

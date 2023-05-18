@@ -242,14 +242,7 @@ const Order = () => {
     }
     return result
   }
-  const totalBalance = (docket) => {
-    console.log(docket)
-    let currentBalance = 0
-    for (let item in docket) {
-      currentBalance += foods[item]['price']
-    }
-    return currentBalance
-  }
+
   const docketRendering = (docket) => {
     let result = []
     for (let item in docket.orders) {
@@ -257,17 +250,17 @@ const Order = () => {
         for (let i=0; i<docket.orders[item]; i++) {
           result.push(
             <div className="flex justify-between w-full mb-2"> 
-              <div>
-                <H4>{item}</H4>
-                <p className="text-[10px] pl-1 font-light">Seat 1</p>
+              <div className=''>
+                <H4 className="h-6 w-[150px] overflow-hidden truncate">{item}</H4>
+                <p className="text-[10px] pl-1 font-light">{foods[item]['type'].toUpperCase()}</p>
               </div>
-              <H4>$ {foods[item]['price']}.00</H4>
+              <H4 className="min-w-[53px] text-right">$ {foods[item]['price']}.00</H4>
             </div>
           )
         }
       }
     }
-    return result.reverse()
+    return result
   }
 
   return (
@@ -322,22 +315,27 @@ const Order = () => {
           </div>
 
           <div>
-            <div className="flex flex-col justify-between w-full p-2 h-[calc(100vh-200px)] rounded-2xl bg-gradient-to-br from-menu_button_start to-menu_button_end drop-shadow-lg">
+            <div className="flex flex-col justify-between w-full py-2 pl-2 pr-1 h-[calc(100vh-200px)] rounded-2xl bg-gradient-to-br from-menu_button_start to-menu_button_end drop-shadow-lg">
               <section>
-                <div className="w-full p-2 overflow-auto min-h-[60px] max-h-[440px]">
+                <div className="w-full p-2 overflow-auto scrollbox min-h-[60px] max-h-[440px]">
                   {docketRendering(docket)}
                 </div>
-                <hr/>
 
-                <div className="flex justify-between mt-2 p-2"> 
-                  <div className="flex gap-2 items-center">
-                    <mwc-icon>receipt</mwc-icon>
-                    <H3>Total</H3>
-                  </div>
-                  <H3>$ {docket.balance}.00</H3>
-                </div>
+                  {!docket.balance == 0 ? 
+                  <>
+                    <hr className=""/>
+                    <div className="flex justify-between mt-2 p-2"> 
+                      <div className="flex gap-2 items-center">
+                        <mwc-icon>receipt</mwc-icon>
+                        <H3>Total</H3>
+                      </div>
+                      <H3 className="pr-1">$ {docket.balance}.00</H3>
+                    </div>
+                  </>
+                  : ''
+                }
               </section>
-              <section>
+              <section className="pr-1">
                 <div className="mb-2">
                   <p className="text-[10px] pl-1">Payment method</p>
                 </div>
