@@ -122,11 +122,6 @@ const foods = {
 
 };
 
-// let orders = {}
-// for (let item of foods) {
-//   orders[item.name] = 0
-// }
-
 const types = []
 for (let item in foods) {
   if (types.includes(foods[item].type)) {
@@ -136,7 +131,10 @@ for (let item in foods) {
 }
 
 const Order = () => {
-  const [ docket, setDocket ] = useState({})
+  const [ docket, setDocket ] = useState({
+    balance : 0,
+    orders : {}
+  })
   const Label = ({ label }) => {
     return (
       <section className="mt-8 mb-4">
@@ -198,27 +196,41 @@ const Order = () => {
               vg={foodList[food].is_VT}
               df={foodList[food].is_GF}
               gf={foodList[food].is_DF}
-              qty={docket[food] || 0}
+              qty={docket.orders[food] || 0}
               add={()=>{
-                docket[food] < 0 ?
+                docket.orders[food] < 0 ?
                 setDocket({
                   ...docket,
-                  [food]: 0
+                  orders: {
+                    ...docket.orders,
+                    [food]: 0
+                  }
                 }) :
                 setDocket({
                   ...docket,
-                  [food]: (docket[food] || 0) + 1
+                  orders: {
+                    ...docket.orders,
+                    [food]: (docket.orders[food] || 0) + 1
+                  },
+                  balance: docket.balance + foods[food]['price']
                 })
               }}
               minus={()=>{
-                docket[food] <= 0 ?
+                docket.orders[food] <= 0 ?
                 setDocket({
                   ...docket,
-                  [food]: 0
+                  orders: {
+                    ...docket.orders,
+                    [food]: 0
+                  }
                 }) :
                 setDocket({
                   ...docket,
-                  [food]: (docket[food] || 0) - 1
+                  orders: {
+                    ...docket.orders,
+                    [food]: (docket.orders[food] || 0) - 1
+                  },
+                  balance: docket.balance - foods[food]['price']
                 })
               }}
               ></FoodButton>:'')
@@ -227,82 +239,24 @@ const Order = () => {
           {labelRender[item] = true} </>: ''}
         </div>
       )
-      console.log(item)
     }
     return result
-
-    // const rendering = foodList.map((item,idx)=>{
-    //   return (
-    //     <div key={idx}>
-    //       {!labelRender[item.type] ? <>
-    //       <Label key={idx} label={item.type.toUpperCase()}></Label> 
-    //       <div className="flex flex-wrap gap-2">
-    //         {foodList.map((food, idx)=>{
-    //           return (item.type === food.type ? <FoodButton 
-    //           key={idx} 
-    //           type={food.type} 
-    //           name={food.name} 
-    //           price={food.price}
-    //           ve={food.is_VG}
-    //           vg={food.is_VT}
-    //           df={food.is_GF}
-    //           gf={food.is_DF}
-    //           add={()=>{
-    //             docket[food.name] < 0 ?
-    //             setDocket({
-    //               ...docket,
-    //               [food.name]: 0
-    //             }) :
-    //             setDocket({
-    //               ...docket,
-    //               [food.name]: docket[food.name] + 1
-    //             })
-    //           }}
-    //           minus={()=>{
-    //             docket[food.name] <= 0 ?
-    //             setDocket({
-    //               ...docket,
-    //               [food.name]: 0
-    //             }) :
-    //             setDocket({
-    //               ...docket,
-    //               [food.name]: docket[food.name] - 1
-    //             })
-    //           }}
-    //           >{docket[food.name]}</FoodButton>:'')
-    //         })}
-    //       </div>
-    //       {labelRender[item.type] = true} </>: ''}
-    //     </div>
-    //     )
-    // })
-    // return rendering
   }
-
-  // const docketRendering = () => {
-  //   let result = []
-  //   for (let item of Object.keys(docket)) {
-  //     result.push(
-  //       <div className="flex justify-between w-full mb-2">
-  //         <div>
-  //           <H4>{item}</H4>
-  //           <p className="text-[10px] pl-1 font-light">Seat 1</p>
-  //         </div>
-  //         <H4>{foods}</H4>
-  //       </div>
-  //     )
-  //   }
-  //   return result
-  // }
-  // console.log(Object.keys(docket))
-
+  const totalBalance = (docket) => {
+    console.log(docket)
+    let currentBalance = 0
+    for (let item in docket) {
+      currentBalance += foods[item]['price']
+    }
+    return currentBalance
+  }
   const docketRendering = (docket) => {
     let result = []
-    for (let item in docket) {
-      if (docket[item] > 0) {
-        for (let i=0; i<docket[item]; i++) {
+    for (let item in docket.orders) {
+      if (docket.orders[item] > 0) {
+        for (let i=0; i<docket.orders[item]; i++) {
           result.push(
-            <div className="flex justify-between w-full mb-2">
+            <div className="flex justify-between w-full mb-2"> 
               <div>
                 <H4>{item}</H4>
                 <p className="text-[10px] pl-1 font-light">Seat 1</p>
@@ -363,30 +317,15 @@ const Order = () => {
           <div>
             <button className="flex justify-between w-full p-4 rounded-2xl bg-gradient-to-br from-menu_button_start to-menu_button_end drop-shadow-lg">
               <H3>Balance</H3>
-              <H3>$ 127.50</H3>
+              <H3>$ {docket.balance}.00</H3>
             </button>
           </div>
 
           <div>
             <div className="flex flex-col justify-between w-full p-2 h-[calc(100vh-200px)] rounded-2xl bg-gradient-to-br from-menu_button_start to-menu_button_end drop-shadow-lg">
               <section>
-                <div className="w-full p-2 overflow min-h-[60px]">
-                  {/* <div className="flex justify-between w-full mb-2">
-                    <div>
-                      <H4>Main 1</H4>
-                      <p className="text-[10px] pl-1 font-light">Seat 1</p>
-                    </div>
-                    <H4>$ 27.50</H4>
-                  </div>
-                  <div className="flex justify-between w-full mb-2">
-                    <div>
-                      <H4>Main 1</H4>
-                      <p className="text-[10px] pl-1 font-light">Seat 1</p>
-                    </div>
-                    <H4>$ 27.50</H4>
-                  </div> */}
+                <div className="w-full p-2 overflow-auto min-h-[60px] max-h-[440px]">
                   {docketRendering(docket)}
-
                 </div>
                 <hr/>
 
@@ -395,7 +334,7 @@ const Order = () => {
                     <mwc-icon>receipt</mwc-icon>
                     <H3>Total</H3>
                   </div>
-                  <H3>$ 127.50</H3>
+                  <H3>$ {docket.balance}.00</H3>
                 </div>
               </section>
               <section>
