@@ -130,7 +130,7 @@ for (let item in foods) {
   types.push(foods[item].type)
 }
 
-const Order = () => {
+const Order = ({ number, seats, closeButton }) => {
   const [ docket, setDocket ] = useState({
     balance : 0,
     orders : {}
@@ -264,8 +264,8 @@ const Order = () => {
   }
 
   return (
-    <article className="bg-menu_bg h-screen w-[calc(100vw-226px-60px)] absolute right-0 px-6 pt-6">
-      <div className="bg-menu_bg w-8 h-24 absolute -left-8 top-12 rounded-bl-full rounded-tl-full flex justify-center items-center">
+    <article className="bg-menu_bg h-screen w-[calc(100vw-226px-60px)] absolute right-0 top-0 px-6 pt-6 z-50">
+      <div className="bg-menu_bg w-8 h-24 absolute -left-8 top-12 rounded-bl-full rounded-tl-full flex justify-center items-center" onClick={closeButton}>
         <mwc-icon>close</mwc-icon>
       </div>
 
@@ -301,8 +301,8 @@ const Order = () => {
         <section className="w-full pl-4 flex flex-col gap-5">
           <div className="flex justify-between">
             <div>
-              <h2 className="text-xl font-semibold">Table 1</h2>
-              <p className="text-sm pl-1 font-light">4 pax</p>
+              <h2 className="text-xl font-semibold">Table {number}</h2>
+              <p className="text-sm pl-1 font-light">{seats} pax</p>
             </div>
             <mwc-icon-button icon='print'></mwc-icon-button>
           </div>
@@ -323,8 +323,8 @@ const Order = () => {
 
                   {!docket.balance == 0 ? 
                   <>
-                    <hr className=""/>
-                    <div className="flex justify-between mt-2 p-2"> 
+                    <hr className="" />
+                    <div className="flex justify-between mt-2 p-2 shadow-[0_-25px_40px_-5px_rgba(255,255,255,1)]"> 
                       <div className="flex gap-2 items-center">
                         <mwc-icon>receipt</mwc-icon>
                         <H3>Total</H3>

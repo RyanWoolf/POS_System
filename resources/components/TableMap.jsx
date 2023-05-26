@@ -76,6 +76,9 @@ const TableMap = () => {
             <button key={i} type="button" className={" rounded-full w-2 h-2 pb-2 mx-1 " + (currentPage === i ? 'bg-zinc-500' : 'bg-zinc-400') } onClick={()=> handleClick(i)}></button>
           ))}
         </div>
+        <div>
+          {}
+        </div>
       </section>
     </>
   )

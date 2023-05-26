@@ -1,4 +1,7 @@
-import React from 'react'
+import React, { useState } from 'react'
+import Order from '../../Order'
+import { render } from 'react-dom'
+import { Link } from 'react-router-dom'
 
 
 function tableSize(seats, direction) {
@@ -21,10 +24,20 @@ function tableStatus(status) {
   }
 }
 
+
 const TableTop = ({ number, seats, direction, status, children }) => {
+  const [showContent, setShowContent] = useState(false)
+  const openContent = () => {
+    setShowContent(true)
+  }
+  const closeContent = () => {
+    setShowContent(false)
+    console.log('closing')
+  }
 
   return (
-    <div className={`flex `}>
+    <Link className={`flex `} onClick={openContent}>
+      {showContent && <Order number={number} seats={seats} closeButton={closeContent}></Order>}
       <div style={tableSize(seats, direction)}
         className={`bg-button flex flex-col pt-4 pb-4 pl-4 justify-between rounded-l-3xl text-[12px] tracking-normal `}>
         <p className="font-bold">{number}</p>
@@ -36,7 +49,7 @@ const TableTop = ({ number, seats, direction, status, children }) => {
       </div>
       <div className={`${tableStatus(status)}` + ` w-[25px] rounded-r-3xl`}>
       </div>
-    </div>
+    </Link>
   )
 }
 
